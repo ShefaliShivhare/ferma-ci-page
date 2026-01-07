@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Intelligence | Ferma Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { overflow-x: hidden; }
+    body { overflow-x: hidden; margin: 0; background: #F7F5FF; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+    .footer-link:hover { color: #fff !important; }
+    .footer-link:focus { outline: 2px solid #7B61FF; outline-offset: 2px; color: #fff; }
+    @keyframes radarSweep { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes pingIn { 0%, 100% { transform: scale(0.8); opacity: 0.3; } 50% { transform: scale(1.2); opacity: 1; } }
+    @keyframes dataStream { 0% { stroke-dashoffset: 100; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+    .radar-sweep { animation: radarSweep 8s linear infinite; transform-origin: center; }
+    .ping { animation: pingIn 3s ease-in-out infinite; }
+    .ping-delay-1 { animation-delay: 0.5s; }
+    .ping-delay-2 { animation-delay: 1s; }
+    .ping-delay-3 { animation-delay: 1.5s; }
+    .ping-delay-4 { animation-delay: 2s; }
+    .data-stream { stroke-dasharray: 100; animation: dataStream 4s ease-in-out infinite; }
+    .stream-1 { animation-delay: 0s; }
+    .stream-2 { animation-delay: 0.8s; }
+    .stream-3 { animation-delay: 1.6s; }
+    .stream-4 { animation-delay: 2.4s; }
+    .stream-5 { animation-delay: 3.2s; }
+    .content-card { background: white; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); transition: all 0.3s ease; }
+    .content-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(123, 97, 255, 0.1); border-color: rgba(123, 97, 255, 0.15); }
+    @media (max-width: 1024px) {
+      .hero-layout { flex-direction: column !important; text-align: center; gap: 48px !important; }
+      .hero-text { max-width: 100% !important; }
+      .hero-visual { max-width: 420px; margin: 0 auto; }
+      .workflow-steps { grid-template-columns: 1fr !important; }
+      .agent-cards { grid-template-columns: 1fr 1fr !important; }
+      .flip-row { flex-direction: column !important; }
+    }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; }
+      .hero-title { font-size: 36px !important; }
+      .section-heading { font-size: 28px !important; }
+      .agent-cards { grid-template-columns: 1fr !important; }
+      .stats-row { flex-wrap: wrap; justify-content: center !important; gap: 24px !important; }
+      .stats-row > div { border: none !important; padding: 0 !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white">Skip to main content</a>
+  <header role="banner" style="background-color: rgba(247, 245, 255, 0.9); position: fixed; top: 0; z-index: 1000; width: 100%; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.02);">
+    <nav role="navigation" aria-label="Main navigation" class="max-w-7xl mx-auto px-8">
+      <div style="display: flex; align-items: center; justify-content: space-between; height: 56px; max-width: 1100px; margin: 0 auto;">
+        <a href="/" aria-label="Ferma Agents home" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 5 1 C 8 0.5, 14 1.5, 20 1 C 24 0.5, 26 1, 27 2 C 27.5 4, 27 10, 27.5 16 C 28 22, 27 25, 26 27 C 24 27.5, 18 27, 12 27.5 C 6 28, 2 27, 1 26 C 0.5 24, 1 18, 0.5 12 C 0 6, 1 2, 2 1 C 3 0.5, 4 1, 5 1 Z" fill="#7B61FF"/>
+            <g transform="translate(3, 4) scale(0.045)">
+              <path d="M200 150 C165 125, 135 105, 110 90" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+              <path d="M200 150 C198 200, 202 280, 200 340" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+              <path d="M200 150 C250 148, 320 152, 380 150" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+              <path d="M200 270 C230 268, 275 272, 310 270" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+            </g>
+          </svg>
+          <span class="text-base font-semibold text-black">Ferma Agents</span>
+        </a>
+        <div class="desktop-nav" style="display: flex; align-items: center; gap: 32px;"></div>
+        <button type="button" class="px-4 py-1.5 text-sm font-medium text-white rounded hover:opacity-90" style="background-color: #7B61FF;">Log In</button>
+      </div>
+    </nav>
+  </header>
+  <div class="min-h-screen" style="background-color: #F7F5FF; padding-top: 56px;">
+    <main id="main-content" role="main">
+      <section style="padding: 80px 24px 60px; max-width: 1200px; margin: 0 auto;">
+        <div class="hero-layout" style="display: flex; align-items: center; gap: 80px;">
+          <div class="hero-text" style="flex: 1; max-width: 520px;">
+            <span style="display: inline-block; background: rgba(123, 97, 255, 0.1); color: #7B61FF; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px;">Competitive Intelligence</span>
+            <h1 class="hero-title" style="font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #111; margin-bottom: 20px;">Intelligence That<br><span style="color: #7B61FF;">Never Sleeps.</span></h1>
+            <p style="font-size: 17px; line-height: 1.7; color: #555; margin-bottom: 32px;">Transform fragmented signals—from trial readouts to Chinese job portals—into a unified competitive advantage. Automate your KIQs and monitor the landscape 24/7.</p>
+            <a href="https://cal.com/ferma/ferma-agents-demo" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; font-size: 14px; font-weight: 600; color: #fff; background: #7B61FF; border-radius: 10px; text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Launch Your CI Agent
+            </a>
+            <div class="stats-row" style="display: flex; gap: 32px; margin-top: 40px; padding-top: 32px; border-top: 1px solid #E5E7EB;">
+              <div><div style="font-size: 32px; font-weight: 700; color: #111;">100+</div><div style="font-size: 13px; color: #777;">Sources</div></div>
+              <div style="border-left: 1px solid #E5E7EB; padding-left: 32px;"><div style="font-size: 32px; font-weight: 700; color: #111;">24/7</div><div style="font-size: 13px; color: #777;">Monitoring</div></div>
+              <div style="border-left: 1px solid #E5E7EB; padding-left: 32px;"><div style="font-size: 32px; font-weight: 700; color: #7B61FF;">80%</div><div style="font-size: 13px; color: #777;">Time Saved</div></div>
+            </div>
+          </div>
+          <div class="hero-visual" style="flex: 1;">
+            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 450px;">
+              <circle cx="200" cy="200" r="180" stroke="#E5E7EB" stroke-width="1" fill="none"/>
+              <circle cx="200" cy="200" r="140" stroke="#E5E7EB" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+              <circle cx="200" cy="200" r="100" stroke="#E5E7EB" stroke-width="1" fill="none"/>
+              <circle cx="200" cy="200" r="60" stroke="#E5E7EB" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+              <g class="radar-sweep">
+                <defs><linearGradient id="sweepGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7B61FF" stop-opacity="0"/><stop offset="100%" stop-color="#7B61FF" stop-opacity="0.3"/></linearGradient></defs>
+                <path d="M200 200 L200 20 A180 180 0 0 1 380 200 Z" fill="url(#sweepGrad)"/>
+              </g>
+              <path class="data-stream stream-1" d="M50 80 Q100 140 180 190" stroke="#7B61FF" stroke-width="2" fill="none"/>
+              <path class="data-stream stream-2" d="M350 60 Q300 120 220 185" stroke="#7B61FF" stroke-width="2" fill="none"/>
+              <path class="data-stream stream-3" d="M380 280 Q320 260 225 210" stroke="#7B61FF" stroke-width="2" fill="none"/>
+              <path class="data-stream stream-4" d="M60 340 Q120 300 185 220" stroke="#7B61FF" stroke-width="2" fill="none"/>
+              <path class="data-stream stream-5" d="M200 390 Q200 320 200 230" stroke="#7B61FF" stroke-width="2" fill="none"/>
+              <g class="ping"><circle cx="50" cy="80" r="12" fill="white" stroke="#7B61FF" stroke-width="2"/><text x="50" y="84" text-anchor="middle" font-size="8" font-family="JetBrains Mono" fill="#7B61FF">CT</text></g>
+              <g class="ping ping-delay-1"><circle cx="350" cy="60" r="12" fill="white" stroke="#7B61FF" stroke-width="2"/><text x="350" y="64" text-anchor="middle" font-size="8" font-family="JetBrains Mono" fill="#7B61FF">SEC</text></g>
+              <g class="ping ping-delay-2"><circle cx="380" cy="280" r="12" fill="white" stroke="#7B61FF" stroke-width="2"/><text x="380" y="284" text-anchor="middle" font-size="7" font-family="JetBrains Mono" fill="#7B61FF">NEWS</text></g>
+              <g class="ping ping-delay-3"><circle cx="60" cy="340" r="12" fill="white" stroke="#7B61FF" stroke-width="2"/><text x="60" y="344" text-anchor="middle" font-size="7" font-family="JetBrains Mono" fill="#7B61FF">JOBS</text></g>
+              <g class="ping ping-delay-4"><circle cx="200" cy="390" r="12" fill="white" stroke="#7B61FF" stroke-width="2"/><text x="200" y="394" text-anchor="middle" font-size="7" font-family="JetBrains Mono" fill="#7B61FF">FDA</text></g>
+              <circle class="ping" cx="160" cy="120" r="6" fill="#7B61FF" opacity="0.7"/>
+              <circle class="ping ping-delay-2" cx="280" cy="150" r="5" fill="#7B61FF" opacity="0.5"/>
+              <circle class="ping ping-delay-4" cx="240" cy="280" r="6" fill="#7B61FF" opacity="0.6"/>
+              <circle class="ping ping-delay-1" cx="130" cy="250" r="4" fill="#7B61FF" opacity="0.4"/>
+              <circle class="ping ping-delay-3" cx="300" cy="240" r="5" fill="#7B61FF" opacity="0.5"/>
+              <circle cx="200" cy="200" r="36" fill="white" stroke="#7B61FF" stroke-width="3"/>
+              <g transform="translate(185, 185) scale(1.1)">
+                <path d="M 5 1 C 8 0.5, 14 1.5, 20 1 C 24 0.5, 26 1, 27 2 C 27.5 4, 27 10, 27.5 16 C 28 22, 27 25, 26 27 C 24 27.5, 18 27, 12 27.5 C 6 28, 2 27, 1 26 C 0.5 24, 1 18, 0.5 12 C 0 6, 1 2, 2 1 C 3 0.5, 4 1, 5 1 Z" fill="#7B61FF"/>
+                <g transform="translate(3, 4) scale(0.045)">
+                  <path d="M200 150 C165 125, 135 105, 110 90" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+                  <path d="M200 150 C198 200, 202 280, 200 340" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+                  <path d="M200 150 C250 148, 320 152, 380 150" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+                  <path d="M200 270 C230 268, 275 272, 310 270" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/>
+                </g>
+              </g>
+              <text x="50" y="55" font-size="9" font-family="JetBrains Mono" fill="#666">ClinicalTrials</text>
+              <text x="320" y="40" font-size="9" font-family="JetBrains Mono" fill="#666">SEC Filings</text>
+              <text x="350" y="310" font-size="9" font-family="JetBrains Mono" fill="#666">Press</text>
+              <text x="20" y="370" font-size="9" font-family="JetBrains Mono" fill="#666">Job Portals</text>
+              <text x="215" y="395" font-size="9" font-family="JetBrains Mono" fill="#666">Regulatory</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+      <section style="padding: 80px 24px; background: white;">
+        <div style="max-width: 1100px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 56px;">
+            <h2 class="section-heading" style="font-size: 36px; font-weight: 700; color: #111; margin-bottom: 12px;">The CI <span style="color: #7B61FF;">Workflow</span></h2>
+            <p style="font-size: 16px; color: #666; max-width: 480px; margin: 0 auto;">From raw signals to strategic insights in three steps</p>
+          </div>
+          <div class="workflow-steps" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+            <div class="content-card" style="border-radius: 16px; padding: 32px;">
+              <div style="width: 44px; height: 44px; background: #7B61FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;"><span style="font-family: 'JetBrains Mono'; font-size: 16px; font-weight: 700; color: #fff;">01</span></div>
+              <h3 style="font-size: 18px; font-weight: 600; color: #111; margin-bottom: 10px;">Multi-Source Aggregation</h3>
+              <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 16px;">Collect signals from 100+ sources—SEC filings, ClinicalTrials.gov, earnings calls, and Chinese intel.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="font-size: 11px; padding: 4px 10px; background: #F3F4F6; border-radius: 100px; color: #555;">10-K</span>
+                <span style="font-size: 11px; padding: 4px 10px; background: #F3F4F6; border-radius: 100px; color: #555;">Trials</span>
+                <span style="font-size: 11px; padding: 4px 10px; background: rgba(123,97,255,0.1); border-radius: 100px; color: #7B61FF;">China</span>
+              </div>
+            </div>
+            <div class="content-card" style="border-radius: 16px; padding: 32px;">
+              <div style="width: 44px; height: 44px; background: #7B61FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;"><span style="font-family: 'JetBrains Mono'; font-size: 16px; font-weight: 700; color: #fff;">02</span></div>
+              <h3 style="font-size: 18px; font-weight: 600; color: #111; margin-bottom: 10px;">Encoded Methodology</h3>
+              <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 16px;">Apply your KIQs and frameworks automatically. Your methodology, encoded into every analysis.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="font-size: 11px; padding: 4px 10px; background: #F3F4F6; border-radius: 100px; color: #555;">KIQs</span>
+                <span style="font-size: 11px; padding: 4px 10px; background: #F3F4F6; border-radius: 100px; color: #555;">Playbooks</span>
+                <span style="font-size: 11px; padding: 4px 10px; background: #F3F4F6; border-radius: 100px; color: #555;">Templates</span>
+              </div>
+            </div>
+            <div class="content-card" style="border-radius: 16px; padding: 32px;">
+              <div style="width: 44px; height: 44px; background: #7B61FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;"><span style="font-family: 'JetBrains Mono'; font-size: 16px; font-weight: 700; color: #fff;">03</span></div>
+              <h3 style="font-size: 18px; font-weight: 600; color: #111; margin-bottom: 10px;">Automated Reporting</h3>
+              <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 16px;">Generate stakeholder-ready PowerPoint decks and Excel models in your templates.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="font-size: 11px; padding: 4px 10px; background: rgba(123,97,255,0.1); border-radius: 100px; color: #7B61FF;">PPTX</span>
+                <span style="font-size: 11px; padding: 4px 10px; background: rgba(123,97,255,0.1); border-radius: 100px; color: #7B61FF;">Excel</span>
+                <span style="font-size: 11px; padding: 4px 10px; background: rgba(123,97,255,0.1); border-radius: 100px; color: #7B61FF;">Alerts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style="padding: 80px 24px; background: #F7F5FF;">
+        <div style="max-width: 1100px; margin: 0 auto;">
+          <div style="margin-bottom: 48px;">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #7B61FF;">Agent Library</span>
+            <h2 class="section-heading" style="font-size: 36px; font-weight: 700; color: #111; margin: 8px 0 12px;">Purpose-Built <span style="color: #7B61FF;">CI Agents</span></h2>
+            <p style="font-size: 16px; color: #666; max-width: 480px;">Specialized agents working together to cover your competitive landscape.</p>
+          </div>
+          <div class="agent-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+            <div class="content-card" style="border-radius: 14px; padding: 24px; display: flex; gap: 16px;">
+              <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #EEF2FF, #E0E7FF); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7B61FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;"><h3 style="font-size: 16px; font-weight: 600; color: #111; margin: 0;">The Landscape Watcher</h3><span style="font-size: 10px; padding: 2px 8px; background: #ECFDF5; color: #059669; border-radius: 100px; font-weight: 600;">Active</span></div><p style="font-size: 13px; color: #666; line-height: 1.5;">Real-time tracking of peer pipeline movements and strategic pivots.</p></div>
+            </div>
+            <div class="content-card" style="border-radius: 14px; padding: 24px; display: flex; gap: 16px;">
+              <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;"><h3 style="font-size: 16px; font-weight: 600; color: #111; margin: 0;">The Catalyst Monitor</h3><span style="font-size: 10px; padding: 2px 8px; background: #ECFDF5; color: #059669; border-radius: 100px; font-weight: 600;">Active</span></div><p style="font-size: 13px; color: #666; line-height: 1.5;">Automatic alerts on trial readouts and regulatory decisions.</p></div>
+            </div>
+            <div class="content-card" style="border-radius: 14px; padding: 24px; display: flex; gap: 16px;">
+              <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #D1FAE5, #A7F3D0); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;"><h3 style="font-size: 16px; font-weight: 600; color: #111; margin: 0;">The Earnings Analyst</h3><span style="font-size: 10px; padding: 2px 8px; background: #ECFDF5; color: #059669; border-radius: 100px; font-weight: 600;">Active</span></div><p style="font-size: 13px; color: #666; line-height: 1.5;">Instant synthesis of competitor earnings and financial guidance.</p></div>
+            </div>
+            <div class="content-card" style="border-radius: 14px; padding: 24px; display: flex; gap: 16px;">
+              <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #FCE7F3, #FBCFE8); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;"><h3 style="font-size: 16px; font-weight: 600; color: #111; margin: 0;">The Talent Tracker</h3><span style="font-size: 10px; padding: 2px 8px; background: #ECFDF5; color: #059669; border-radius: 100px; font-weight: 600;">Active</span></div><p style="font-size: 13px; color: #666; line-height: 1.5;">Monitoring hiring trends to predict competitor strategy shifts.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style="padding: 80px 24px; background: white;">
+        <div style="max-width: 900px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 48px;">
+            <span style="display: inline-block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #7B61FF; background: rgba(123,97,255,0.1); padding: 6px 14px; border-radius: 100px; margin-bottom: 12px;">The Great Flip</span>
+            <h2 class="section-heading" style="font-size: 36px; font-weight: 700; color: #111; margin-bottom: 12px;">Reclaim Your Time</h2>
+            <p style="font-size: 16px; color: #666;">Stop drowning in data collection. Start owning the strategic narrative.</p>
+          </div>
+          <div class="flip-row" style="display: flex; gap: 32px; align-items: stretch;">
+            <div class="content-card" style="flex: 1; border-radius: 16px; padding: 32px; text-align: center; border-top: 4px solid #EF4444;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #EF4444; margin-bottom: 6px;">Current State</div>
+              <div style="font-size: 13px; color: #999; margin-bottom: 24px;">How most CI teams work</div>
+              <div style="font-size: 56px; font-weight: 800; color: #EF4444; line-height: 1;">80%</div>
+              <div style="font-size: 15px; font-weight: 600; color: #111; margin: 6px 0 16px;">Grunt Work</div>
+              <div style="height: 8px; background: #FEE2E2; border-radius: 100px; overflow: hidden; margin-bottom: 24px;"><div style="width: 80%; height: 100%; background: #EF4444; border-radius: 100px;"></div></div>
+              <div style="font-size: 24px; font-weight: 700; color: #D1D5DB;">20%</div>
+              <div style="font-size: 12px; color: #999;">Strategic Thinking</div>
+            </div>
+            <div style="display: flex; align-items: center;"><div style="width: 44px; height: 44px; background: #7B61FF; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+            <div class="content-card" style="flex: 1; border-radius: 16px; padding: 32px; text-align: center; border-top: 4px solid #7B61FF; border: 2px solid rgba(123,97,255,0.2);">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #7B61FF; margin-bottom: 6px;">With Ferma</div>
+              <div style="font-size: 13px; color: #999; margin-bottom: 24px;">How your time should be spent</div>
+              <div style="font-size: 56px; font-weight: 800; color: #7B61FF; line-height: 1;">80%</div>
+              <div style="font-size: 15px; font-weight: 600; color: #111; margin: 6px 0 16px;">Strategic Thinking</div>
+              <div style="height: 8px; background: rgba(123,97,255,0.1); border-radius: 100px; overflow: hidden; margin-bottom: 24px;"><div style="width: 80%; height: 100%; background: linear-gradient(90deg, #7B61FF, #9D8AFF); border-radius: 100px;"></div></div>
+              <div style="font-size: 24px; font-weight: 700; color: #10B981;">20%</div>
+              <div style="font-size: 12px; color: #999;">Automated Collection</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style="padding: 80px 24px; background: #F7F5FF; text-align: center;">
+        <h2 style="font-size: 32px; font-weight: 700; color: #111; margin-bottom: 16px;">Ready to Transform Your CI?</h2>
+        <p style="font-size: 16px; color: #666; margin-bottom: 32px;">See how Ferma Agents can automate your competitive intelligence workflow.</p>
+        <a href="https://cal.com/ferma/ferma-agents-demo" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-size: 14px; font-weight: 600; color: #fff; background: #7B61FF; border-radius: 10px; text-decoration: none;">Book a Demo</a>
+      </section>
+    </main>
+    <footer style="background-color: #000; padding: 0;">
+      <div class="max-w-7xl mx-auto px-8">
+        <div style="display: flex; align-items: center; justify-content: center; height: 56px; gap: 100px;">
+          <div style="flex: 0 0 400px; display: flex; align-items: center; gap: 8px;">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M 5 1 C 8 0.5, 14 1.5, 20 1 C 24 0.5, 26 1, 27 2 C 27.5 4, 27 10, 27.5 16 C 28 22, 27 25, 26 27 C 24 27.5, 18 27, 12 27.5 C 6 28, 2 27, 1 26 C 0.5 24, 1 18, 0.5 12 C 0 6, 1 2, 2 1 C 3 0.5, 4 1, 5 1 Z" fill="#7B61FF"/><g transform="translate(3, 4) scale(0.045)"><path d="M200 150 C165 125, 135 105, 110 90" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/><path d="M200 150 C198 200, 202 280, 200 340" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/><path d="M200 150 C250 148, 320 152, 380 150" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/><path d="M200 270 C230 268, 275 272, 310 270" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" fill="none"/></g></svg>
+            <span style="font-size: 14px; font-weight: 600; color: #fff;">Ferma Agents</span>
+          </div>
+          <div style="flex: 0 0 600px; display: flex; justify-content: flex-end; align-items: center; gap: 16px;">
+            <a href="mailto:info@ferma.ai" class="footer-link" style="font-size: 14px; color: #9CA3AF; text-decoration: none;">info@ferma.ai</a>
+            <span style="color: #4B5563;">•</span>
+            <a href="/terms" class="footer-link" style="font-size: 14px; color: #9CA3AF; text-decoration: none;">Terms</a>
+            <span style="color: #4B5563;">•</span>
+            <a href="/privacy" class="footer-link" style="font-size: 14px; color: #9CA3AF; text-decoration: none;">Privacy</a>
+            <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 999px; margin-left: 12px; border: 1px solid rgba(255,255,255,0.1);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span style="font-size: 11px; color: #fff; font-weight: 600;">SOC2 Type II</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
